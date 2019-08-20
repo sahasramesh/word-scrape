@@ -100,12 +100,10 @@ if userLen == 8:
         comboPerms+= shorterPerms(i)
     allPerms = perms + comboPerms
 
-removeShortPerms(allPerms)
 allPerms = list(dict.fromkeys(allPerms))
 allPermsLen = len(allPerms)
 allPerms = removeShortPerms(allPerms)
 print(allPerms)
-exit()
 
 #find match with perms from word doc
 print("\nFinding matches...")
