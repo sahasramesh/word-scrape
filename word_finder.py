@@ -28,9 +28,9 @@ def convertLet(list):
     res = str("".join(s))
     print(res)
 
-#function to remove 2 and 1 letter wordsLen
-def removeShortPerms(words):
-    return [i for i in words if len(i) <= 4]
+#function to remove 2 and 1 letter words
+def removeShortPerms(wordss):
+    return [i for i in wordss if len(i) >= 3]
 
 #get user input
 userLet = input("Enter letters(up to 8):")
@@ -38,8 +38,9 @@ start_time = time.time()
 userLen = len(userLet)
 
 #open words doc and split words into list
-with open("everyword.rtf") as f:
+with open("someword") as f:
     words = f.read().split()
+words = [x.lower() for x in words]
 wordsLen = len(words)
 
 #find all permutations of user input
@@ -51,7 +52,7 @@ print("\nLoading permutations...")
 
 #filter out words longer than the user-submitted letters(or too short)
 for z in range(0, wordsLen):
-    if len(words[z]) <= userLen:
+    if 3 <= len(words[z]) <= userLen:
         filterWords.append(words[z])
 filterLen = len(filterWords)
 
@@ -72,9 +73,7 @@ if userLen == 2:
     allPerms = perms
 
 if userLen == 3:
-    for i in range(2, userLen):
-        comboPerms+= shorterPerms(i)
-    allPerms = perms + comboPerms
+    allPerms = perms
 
 if userLen == 4:
     for i in range(2, userLen):
@@ -104,6 +103,9 @@ if userLen == 8:
 removeShortPerms(allPerms)
 allPerms = list(dict.fromkeys(allPerms))
 allPermsLen = len(allPerms)
+allPerms = removeShortPerms(allPerms)
+print(allPerms)
+exit()
 
 #find match with perms from word doc
 print("\nFinding matches...")
