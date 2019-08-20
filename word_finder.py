@@ -38,7 +38,7 @@ start_time = time.time()
 userLen = len(userLet)
 
 #open words doc and split words into list
-with open("someword") as f:
+with open("everyword.rtf") as f:
     words = f.read().split()
 words = [x.lower() for x in words]
 wordsLen = len(words)
@@ -76,33 +76,34 @@ if userLen == 3:
     allPerms = perms
 
 if userLen == 4:
-    for i in range(2, userLen):
+    for i in range(1, userLen):
         comboPerms+= shorterPerms(i)
     allPerms = perms + comboPerms
 
 if userLen == 5:
-    for i in range(2, userLen):
+    for i in range(1, userLen):
         comboPerms+= shorterPerms(i)
+    print(comboPerms)
     allPerms = perms + comboPerms
 
 if userLen == 6:
-    for i in range(2, userLen):
+    for i in range(1, userLen):
         comboPerms+= shorterPerms(i)
     allPerms = perms + comboPerms
 
 if userLen == 7:
-    for i in range(2, userLen):
+    for i in range(1, userLen):
         comboPerms+= shorterPerms(i)
     allPerms = perms + comboPerms
 
 if userLen == 8:
-    for i in range(2, userLen):
+    for i in range(1, userLen):
         comboPerms+= shorterPerms(i)
     allPerms = perms + comboPerms
 
 allPerms = list(dict.fromkeys(allPerms))
-allPermsLen = len(allPerms)
 allPerms = removeShortPerms(allPerms)
+allPermsLen = len(allPerms)
 print(allPerms)
 
 #find match with perms from word doc
