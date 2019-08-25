@@ -36,6 +36,9 @@ def removeShortPerms(wordss):
 userLet = input("Enter letters(up to 8):")
 start_time = time.time()
 userLen = len(userLet)
+if userLen > 8:
+    print("Too many letters!\n")
+    exit()
 
 #open words doc and split words into list
 with open("everyword.rtf") as f:
@@ -77,37 +80,36 @@ if userLen == 3:
 
 if userLen == 4:
     for i in range(1, userLen):
-        comboPerms+= shorterPerms(i)
+        comboPerms+= list(dict.fromkeys(shorterPerms(i)))
     allPerms = perms + comboPerms
 
 if userLen == 5:
     for i in range(1, userLen):
-        comboPerms+= shorterPerms(i)
+        comboPerms+= list(dict.fromkeys(shorterPerms(i)))
     print(comboPerms)
     allPerms = perms + comboPerms
 
 if userLen == 6:
     for i in range(1, userLen):
-        comboPerms+= shorterPerms(i)
+        comboPerms+= list(dict.fromkeys(shorterPerms(i)))
     allPerms = perms + comboPerms
 
 if userLen == 7:
     for i in range(1, userLen):
-        comboPerms+= shorterPerms(i)
+        comboPerms+= list(dict.fromkeys(shorterPerms(i)))
     allPerms = perms + comboPerms
 
 if userLen == 8:
     for i in range(1, userLen):
-        comboPerms+= shorterPerms(i)
+        comboPerms+= list(dict.fromkeys(shorterPerms(i)))
     allPerms = perms + comboPerms
 
 allPerms = list(dict.fromkeys(allPerms))
 allPerms = removeShortPerms(allPerms)
 allPermsLen = len(allPerms)
-print(allPerms)
 
 #find match with perms from word doc
-print("\nFinding matches...")
+print("Finding matches...\n")
 for x in range(0, allPermsLen):
     for y in range(0, filterLen):
         if allPerms[x] == filterWords[y]:
