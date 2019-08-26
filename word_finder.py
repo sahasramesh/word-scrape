@@ -6,6 +6,10 @@ import time
 from itertools import permutations
 start_time = time.time()
 
+#set GUI font
+windowFont = 'San Francisco'
+
+#contain full program in a function for GUI
 def WordScrape(userLet):
     #define counter and empty lists
     ctr = 0
@@ -118,23 +122,22 @@ def WordScrape(userLet):
 
 #implelement GUI
 layout = [
-    [sg.Text('Enter your letters:', size=(15, 1)), sg.InputText()],
-    [sg.Text('Words:'), sg.Text('', size=(150,1), key='_OUTPUT_')],
-    [sg.Submit(), sg.Exit()]
+    [sg.Text('Enter your letters:', size=(15, 1), font=(windowFont, 15)), sg.InputText()],
+    [sg.Text('Words:', size=(5, 10), font=(windowFont, 15)), sg.Text('', size=(30,10), font=(windowFont, 15), key='_WORDS_')],
+    [sg.Submit(font=(windowFont, 15)), sg.Exit(font=(windowFont, 15))]
 ]
 
 window = sg.Window('WordScrape', layout)
 
 while True:
     event, values = window.Read()
-    print(event, values)
     if event is None or event == 'Exit':
         break
     if event == 'Submit':
-        window.Element('_OUTPUT_').Update(str(WordScrape(values[0])))
+        window.Element('_WORDS_').Update(str(WordScrape(values[0])))
+        print('Done')
 
 window.Close()
 
-print(values[0])
 print("\n")
 print ("My program took", time.time() - start_time, "seconds to run\n")
