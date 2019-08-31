@@ -9,13 +9,21 @@ start_time = time.time()
 #set GUI font
 windowFont = 'San Francisco'
 
+#variables for terminal output
+ctr = 0
+longCtr = []
+
+#function to convert list to string
+def convert(list):
+    s = [str(i) for i in list]
+    res = str(", ".join(s))
+    return res
+
 #contain full program in a function for GUI
 def WordScrape(userLet):
     #define counter and empty lists
-    ctr = 0
     wordCombo = []
     wordLet = []
-    longCtr = 0
     filterWords = []
     finalList = []
     comboPerms = []
@@ -24,18 +32,6 @@ def WordScrape(userLet):
     #removes duplicates from list
     def noRepeats(x):
         return list(dict.fromkeys(x))
-
-    #function to convert list to string
-    def convert(list):
-        s = [str(i) for i in list]
-        res = str(", ".join(s))
-        return res
-
-    #convert list of letters into strings
-    def convertLet(list):
-        s = [str(i) for i in list]
-        res = str("".join(s))
-        return res
 
     #function to remove 2 and 1 letter words
     def removeShortPerms(wordss):
@@ -118,7 +114,7 @@ def WordScrape(userLet):
             if allPerms[x] == filterWords[y]:
                 finalList.append(allPerms[x])
 
-    return str(convert(noRepeats(finalList)))
+    return noRepeats(finalList)
 
 #implelement GUI
 layout = [
@@ -134,10 +130,15 @@ while True:
     if event is None or event == 'Exit':
         break
     if event == 'Submit':
-        window.Element('_WORDS_').Update(str(WordScrape(values[0])))
+        window.Element('_WORDS_').Update(str(convert(WordScrape(values[0]))))
         print('Done')
+        ctr+=1
+        longCtr+=WordScrape(values[0])
+
 
 window.Close()
 
 print("\n")
-print ("My program took", time.time() - start_time, "seconds to run\n")
+print ("My program ran for", time.time() - start_time, "seconds")
+print("Processed", ctr, "letter combinations")
+print("Generated", len(longCtr), "words\n")
