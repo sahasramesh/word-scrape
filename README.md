@@ -2,11 +2,13 @@
 Python program that takes in letters as input and returns every word that can be made with those letters. Inspired by the iPhone game Wordscapes. 
 
 ## Set up notes
-To run this file, download the word_finder.py and everyword.rtf files in this repository. Move them to the Documents file on your computer. 
+In order to run any of this code, you will to have Python 3 or later installed on your computer. Click [here](https://www.python.org/downloads/) to download.
+
+After downloading Python, download the word_finder.py and everyword.rtf files in this repository. Move them to the Documents file on your computer. 
 
 Next open the Command Prompt or Terminal (depending on if you're using a Windows computer or a Mac). 
 
-Before running the program, you will have to install a module called PySimpleGUI in order to be able to run the graphical user interface that is built into word_finder.py. To do so, type in
+Before running the program, you will have to install a module called [PySimpleGUI](https://pysimplegui.readthedocs.io/en/latest/) in order to be able to run the graphical user interface in word_finder.py. To do so, type in
 
 `pip install PySimpleGUI`
 
