@@ -1,8 +1,7 @@
-#import GUI module
-import PySimpleGUI as sg
-
-#import permutations module and timer
 import time
+import webbrowser
+import tkinter as tk
+from tkinter import *
 from itertools import permutations
 start_time = time.time()
 
@@ -13,12 +12,6 @@ windowFont = 'San Francisco'
 ctr = 0
 longCtr = []
 
-#function to convert list to string
-def convert(list):
-    s = [str(i) for i in list]
-    res = str(", ".join(s))
-    return res
-
 #contain full program in a function for GUI
 def WordScrape(userLet):
     #define counter and empty lists
@@ -28,6 +21,12 @@ def WordScrape(userLet):
     finalList = []
     comboPerms = []
     allPerms = []
+
+    #function to convert list to string
+    def convert(list):
+        s = [str(i) for i in list]
+        res = str(", ".join(s))
+        return res
 
     #removes duplicates from list
     def noRepeats(x):
@@ -69,36 +68,10 @@ def WordScrape(userLet):
         return newPerms
 
     #add all perm lists depending on number of letters
-    if userLen == 1:
+    if 1 <= userLen <= 3:
         allPerms = perms
 
-    if userLen == 2:
-        allPerms = perms
-
-    if userLen == 3:
-        allPerms = perms
-
-    if userLen == 4:
-        for i in range(1, userLen):
-            comboPerms+= list(dict.fromkeys(shorterPerms(i)))
-        allPerms = perms + comboPerms
-
-    if userLen == 5:
-        for i in range(1, userLen):
-            comboPerms+= list(dict.fromkeys(shorterPerms(i)))
-        allPerms = perms + comboPerms
-
-    if userLen == 6:
-        for i in range(1, userLen):
-            comboPerms+= list(dict.fromkeys(shorterPerms(i)))
-        allPerms = perms + comboPerms
-
-    if userLen == 7:
-        for i in range(1, userLen):
-            comboPerms+= list(dict.fromkeys(shorterPerms(i)))
-        allPerms = perms + comboPerms
-
-    if userLen == 8:
+    if 4 <= userLen <= 9:
         for i in range(1, userLen):
             comboPerms+= list(dict.fromkeys(shorterPerms(i)))
         allPerms = perms + comboPerms
@@ -113,32 +86,78 @@ def WordScrape(userLet):
         for y in range(0, filterLen):
             if allPerms[x] == filterWords[y]:
                 finalList.append(allPerms[x])
+    print(len(finalList))
+    outputList = noRepeats(finalList)
+    return outputList
 
-    return noRepeats(finalList)
+window = Tk()
+window.configure(background='#EEE')
+window.title("WordScrape")
+window.geometry('325x350')
+window.resizable(width=False, height=False)
 
-#implelement GUI
-layout = [
-    [sg.Text('Enter your letters:', size=(15, 1), font=(windowFont, 15)), sg.InputText()],
-    [sg.Text('Words:', size=(5, 10), font=(windowFont, 15)), sg.Text('', size=(30,10), font=(windowFont, 15), key='_WORDS_')],
-    [sg.Submit(font=(windowFont, 15)), sg.Exit(font=(windowFont, 15))]
-]
+n = 14
+fonty = "Courier"
+def submitbtn():
+    wordys = WordScrape(txt.get())
+    lbl1.configure(text=wordys, wraplength=280, justify=LEFT)
 
-window = sg.Window('WordScrape', layout)
+def clearbtn():
+    txt.delete(0, END)
+    txt.insert(0, "")
+    lbl1.configure(text="")
 
-while True:
-    event, values = window.Read()
-    if event is None or event == 'Exit':
-        break
-    if event == 'Submit':
-        window.Element('_WORDS_').Update(str(convert(WordScrape(values[0]))))
-        print('Done')
-        ctr+=1
-        longCtr+=WordScrape(values[0])
+def tagbtn():
+    webbrowser.open("http://sahasramesh.com")
 
+#center tkinter window
+window.eval('tk::PlaceWindow %s center' % window.winfo_toplevel())
 
-window.Close()
+fr = Frame(window, bg='#EEE')
+fr.grid(column=0, row=0, padx=(10, 0), pady=(10, 10), sticky=W)
+
+#(0,0) letter prompt text
+lbl = Label(fr, text="Enter Letters:", bg='#EEE', font=(fonty, n))
+lbl.pack(side=LEFT)
+
+#(1,0) source folder text box
+txt = Entry(fr, width=20, bg='#EEE', font=(fonty, n))
+txt.pack(side=LEFT)
+
+#(1,1) output label
+lbl1 = Label(window, text="", bg='#EEE', font=(fonty, n))
+lbl1.grid(column=0, row=1, padx=(10,0), sticky=W)
+
+fr1 = Frame(window, bg='#EEE')
+fr1.grid(column=0, row=2, padx=(10, 0), pady=(10, 0), sticky=W)
+
+#(0,2) submit button
+btn = Button(fr1, text="Submit", fg="#FF4500", font=(fonty, n), command=submitbtn)
+btn.pack(side=LEFT)
+
+lbl2 = Label(fr1, text=" ", bg='#EEE', font=(fonty, n))
+lbl2.pack(side=LEFT)
+
+btn1 = Button(fr1, text="Clear", font=(fonty, n), command=clearbtn)
+btn1.pack(side=LEFT)
+
+fr2 = Frame(window, bg='#EEE')
+fr2.grid(column=0, row=3, padx=(10, 0), pady=(10, 0), sticky=W)
+
+tag = Label(fr2, text="An original project by", fg='#737373', bg='#EEE', font=(fonty, 10))
+tag.pack(side=LEFT)
+
+btn2 = Button(fr2, text="Sahas Ramesh", fg="#FF4500", bd=0, activebackground='#EEE', highlightbackground='#EEE', highlightcolor='#EEE', highlightthickness=0, font=(fonty, 10), command=tagbtn)
+btn2.pack(side=LEFT)
+
+window.mainloop()
+
 
 print("\n")
-print ("My program ran for", time.time() - start_time, "seconds")
+print("My program ran for", time.time() - start_time, "seconds")
 print("Processed", ctr, "letter combinations")
 print("Generated", len(longCtr), "words\n")
+
+'''
+pyinstaller --onefile --windowed --add-binary='/System/Library/Frameworks/Tk.framework/Tk':'tk' --add-binary='/System/Library/Frameworks/Tcl.framework/Tcl':'tcl' word_finder.py
+'''
