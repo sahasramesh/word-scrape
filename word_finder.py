@@ -1,16 +1,9 @@
+import os
 import time
 import webbrowser
 import tkinter as tk
 from tkinter import *
 from itertools import permutations
-start_time = time.time()
-
-#set GUI font
-windowFont = 'San Francisco'
-
-#variables for terminal output
-ctr = 0
-longCtr = []
 
 #contain full program in a function for GUI
 def WordScrape(userLet):
@@ -40,7 +33,7 @@ def WordScrape(userLet):
     userLen = len(userLet)
 
     #open words doc and split words into list
-    with open("everyword.rtf") as f:
+    with open("everyword.rtf")) as f:
         words = f.read().split()
     words = [x.lower() for x in words]
     wordsLen = len(words)
@@ -86,7 +79,7 @@ def WordScrape(userLet):
         for y in range(0, filterLen):
             if allPerms[x] == filterWords[y]:
                 finalList.append(allPerms[x])
-    print(len(finalList))
+
     outputList = noRepeats(finalList)
     return outputList
 
@@ -152,11 +145,6 @@ btn2.pack(side=LEFT)
 
 window.mainloop()
 
-
-print("\n")
-print("My program ran for", time.time() - start_time, "seconds")
-print("Processed", ctr, "letter combinations")
-print("Generated", len(longCtr), "words\n")
 
 '''
 pyinstaller --onefile --windowed --add-binary='/System/Library/Frameworks/Tk.framework/Tk':'tk' --add-binary='/System/Library/Frameworks/Tcl.framework/Tcl':'tcl' word_finder.py
