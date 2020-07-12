@@ -22,5 +22,7 @@ After closing the window, if you look at your Command Prompt/Terminal, you shoul
 
 ## Files
 - **word_finder.py** - This is the main file that includes all the logic.
-- **everyword.rtf** - This is a text file containing over 58,000 words. This file is referenced in wor_finder.py and is looped through for every possible occurence of the inputted letters.
+- **everyword.rtf** - This is a text file containing over 58,000 words. This file is referenced in word_finder.py and is looped through for every possible occurence of the inputted letters.
+- **wordscrapelogo.icns** - A macOS icon version of the WordScrape logo
+- **wordscrapelogo.png** - A png version of the WordScrape logo
 
