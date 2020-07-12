@@ -7,9 +7,8 @@ from itertools import permutations
 
 #contain full program in a function for GUI
 def WordScrape(userLet):
+
     #define counter and empty lists
-    wordCombo = []
-    wordLet = []
     filterWords = []
     finalList = []
     comboPerms = []
@@ -33,7 +32,7 @@ def WordScrape(userLet):
     userLen = len(userLet)
 
     #open words doc and split words into list
-    with open("everyword.rtf")) as f:
+    with open("everyword.rtf") as f:
         words = f.read().split()
     words = [x.lower() for x in words]
     wordsLen = len(words)
